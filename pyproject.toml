@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ms-ops-mcp"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=2.0",
+    "pyyaml>=6.0",
+    "python-docx>=1.0",
+    "python-pptx>=0.6",
+]
+
+# Declared so CI and a laptop install the same list.
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# So the suite runs without installing the package. `pip install -e .` would work too,
+# but it writes `ms_ops_mcp.egg-info/` into the repo root, and check_repo_hygiene.py
+# then rejects that folder as a bad customer slug — which is exactly how this broke CI
+# on 2026-10-02. No install, no build artifact, nothing for the hygiene gate to trip on.
+pythonpath = ["."]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["msops*"]

@@ -1,0 +1,23 @@
+name: Acme Retail
+display_name: Acme Retail
+folder: acme-retail
+description: >-
+  Fictional example customer. Online retailer running a web storefront,
+  API and PostgreSQL database on AWS. Used to demonstrate the full OpsBrain
+  lifecycle: first assessment, WAFR, remediation issues, MoP, knowledge base.
+providers:
+  - provider: aws
+    accounts:
+      - id: '123456789012'
+        profile: acme-retail
+        region: ap-southeast-1
+        role: aws_ms
+        purpose: production
+        auth:
+          method: sso_session
+          sso_session: example-sso
+          login_command: aws sso login --sso-session example-sso
+contacts:
+  cost_alert:
+    to: [ops@acme-retail.example]
+  am: [account.manager@example-msp.com]

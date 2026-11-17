@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "ms-ops": {
+      "type": "stdio",
+      "command": "__PROJECT_DIR__/.venv/bin/python",
+      "args": [
+        "__PROJECT_DIR__/msops/server.py"
+      ],
+      "env": {}
+    },
+    "gitlab": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@zereight/mcp-gitlab"
+      ],
+      "env": {
+        "GITLAB_API_URL": "https://gitlab.com/api/v4",
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "${GITLAB_PAT}",
+        "GITLAB_READ_ONLY_MODE": "true"
+      }
+    }
+  }
+}
